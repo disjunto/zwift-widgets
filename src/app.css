@@ -1,0 +1,107 @@
+body {
+    height: 100%;
+    width: 100%;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+
+    -webkit-app-region: drag;
+}
+
+.frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body:hover .titleBar, .titleBar:hover {
+    visibility: visible;
+}
+
+#btn-close {
+    position: relative;
+    top: -4px;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
+
+    color: #b9bbbe;
+
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex
+}
+#btn-close:hover {
+    color: #fff;
+    background-color: #f04747;
+}
+
+.app {
+    padding: 0 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/**
+ * Menu Bar
+ */
+ #menu-bar {
+    visibility: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    background: #202225;
+    -webkit-app-region: drag;
+    color: #fff;
+  }
+  
+  #menu-bar > div {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menubar-btn {
+    -webkit-app-region: no-drag;
+  }
+  
+  .container {
+    height: calc(100vh - 30px);
+    background: #34475ab0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+  }
+  
+  button {
+    height: 100%;
+    padding: 0 15px;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  
+  button:hover {
+    background: rgba(221, 221, 221, 0.2);
+  }
+  
+  #close-btn:hover {
+    background: #f04747;
+  }
+  
+  button i {
+    color: white;
+  }
