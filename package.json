@@ -2,19 +2,30 @@
   "name": "zwift-widgets",
   "version": "1.0.0",
   "description": "Overlay utility for adding extra information to the Zwift UI",
-  "main": "index.js",
+  "build": {
+    "appId": "amd.zwift_widgets"
+  },
+  "main": "src/App.ts",
   "scripts": {
     "build": "webpack",
-    "start": "npm run build && electron ./dist/app.js"
+    "start": "yarn build --mode=development && electron ./out/app.js",
+    "restart": "electron ./out/app.js",
+    "pack": "electron-builder --dir",
+    "dist": "yarn build --mode=production && electron-builder"
   },
+  "postinstall": "electron-builder install-app-deps",
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "devDependencies": {
+    "@types/electron-store": "^3.2.0",
+    "@types/ip": "^1.1.0",
+    "@types/node": "^13.13.5",
     "css-loader": "^3.5.3",
     "electron": "^8.2.5",
-    "electron-rebuild": "^1.10.1",
+    "electron-builder": "^22.6.0",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "node-loader": "^0.6.0",
     "ts-loader": "^7.0.3",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
