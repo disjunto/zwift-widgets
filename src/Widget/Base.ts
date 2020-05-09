@@ -12,8 +12,8 @@ export default class Base {
         // Create and add to DOM
         /* eslint-disable */
         // @ts-ignore TS seems to be falling over here for an unknown reason // eslint-disable-line
-        /* eslint-enable */
         const widget = (document.querySelector('#template--' + template).content.cloneNode(true)) as HTMLElement;
+        /* eslint-enable */
         widget.querySelector('.widget').id = 'widget-' + id;
 
         if (preactivate) {

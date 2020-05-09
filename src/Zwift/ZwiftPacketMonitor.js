@@ -1,7 +1,7 @@
+/* eslint-disable */
 import zwiftProtoRoot from './zwiftProto';
 import EventEmitter from 'events';
 import { Cap, decoders } from 'cap';
-import { Buffer } from 'node';
 
 const PROTOCOL = decoders.PROTOCOL;
 const buffer = new Buffer.alloc(65535);
