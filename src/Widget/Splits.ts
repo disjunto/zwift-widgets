@@ -2,11 +2,13 @@ import Base from "./Base";
 
 export default class Splits extends Base {
     private splitDistance: number;
+    private lastSplitDistance: number;
 
     constructor(splitDistance: number, label: string) {
         super();
         
         this.splitDistance = splitDistance;
+        this.lastSplitDistance = 0;
 
         this.initialise(label);
     }
@@ -35,5 +37,9 @@ export default class Splits extends Base {
      */
     public update(currentDistance: number, pace: number, timeElapsed: number): void {
         // TODO: Implement
+        if ((currentDistance - this.lastSplitDistance) > this.splitDistance) {
+            // Create a split
+            this.lastSplitDistance = currentDistance;
+        }
     }
 }
