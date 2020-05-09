@@ -1,32 +1,30 @@
-import { remote, ipcRenderer } from 'electron';
+import { remote, ipcRenderer, BrowserWindow } from 'electron';
 
-function getCurrentWindow() {
+export function getCurrentWindow(): BrowserWindow {
   return remote.getCurrentWindow();
 }
 
-function openMenu(x, y) {
+export function openMenu(x: number, y: number): void {
   ipcRenderer.send(`display-app-menu`, { x, y });
 }
 
-function minimizeWindow(browserWindow = getCurrentWindow()) {
+export function minimizeWindow(browserWindow: BrowserWindow = getCurrentWindow()): void {
   if (browserWindow.minimizable) {
-    // browserWindow.isMinimizable() for old electron versions
     browserWindow.minimize();
   }
 }
 
-function maximizeWindow(browserWindow = getCurrentWindow()) {
+export function maximizeWindow(browserWindow: BrowserWindow = getCurrentWindow()): void {
   if (browserWindow.maximizable) {
-    // browserWindow.isMaximizable() for old electron versions
     browserWindow.maximize();
   }
 }
 
-function unmaximizeWindow(browserWindow = getCurrentWindow()) {
+export function unmaximizeWindow(browserWindow: BrowserWindow = getCurrentWindow()): void {
   browserWindow.unmaximize();
 }
 
-function maxUnmaxWindow(browserWindow = getCurrentWindow()) {
+export function maxUnmaxWindow(browserWindow: BrowserWindow = getCurrentWindow()): void {
   if (browserWindow.isMaximized()) {
     browserWindow.unmaximize();
   } else {
@@ -34,21 +32,10 @@ function maxUnmaxWindow(browserWindow = getCurrentWindow()) {
   }
 }
 
-function closeWindow(browserWindow = getCurrentWindow()) {
+export function closeWindow(browserWindow: BrowserWindow = getCurrentWindow()): void {
   browserWindow.close();
 }
 
-function isWindowMaximized(browserWindow = getCurrentWindow()) {
+export function isWindowMaximized(browserWindow: BrowserWindow = getCurrentWindow()): boolean {
   return browserWindow.isMaximized();
 }
-
-module.exports = {
-  getCurrentWindow,
-  openMenu,
-  minimizeWindow,
-  maximizeWindow,
-  unmaximizeWindow,
-  maxUnmaxWindow,
-  isWindowMaximized,
-  closeWindow,
-};

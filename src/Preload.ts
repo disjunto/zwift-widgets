@@ -1,10 +1,8 @@
 import { ipcRenderer } from 'electron';
 import ZwiftPacketMonitor from './Zwift/ZwiftPacketMonitor';
 import { address } from 'ip';
-
-console.log('Preload running');
-
-const {
+import Store = require('electron-store');
+import {
     getCurrentWindow,
     openMenu,
     minimizeWindow,
@@ -12,7 +10,7 @@ const {
     maxUnmaxWindow,
     isWindowMaximized,
     closeWindow,
-} = require("./Menu/Functions");
+} from './Menu/Functions';
 
 window.addEventListener("DOMContentLoaded", () => {
     window.getCurrentWindow = getCurrentWindow;
@@ -32,7 +30,5 @@ window.zwiftData.start();
 process.once('loaded', () => {
     window.ipcRenderer = ipcRenderer;
 });
-
-const Store = require('electron-store');
 
 window.appConfig = new Store();    

@@ -1,14 +1,12 @@
-import { MenuItemConstructorOptions } from "electron";
-
-const { app, Menu, ipcMain } = require("electron");
-const Store = require('electron-store');
+import { MenuItemConstructorOptions, Menu, BrowserWindow, MenuItem } from "electron";
+import Store = require('electron-store');
 
 const store = new Store();
 
 const isMac = process.platform === "darwin";
 
-const updatePredictor = (id, enabled, win) => {
-    let predictors = store.get('predictors');
+const updatePredictor = (id: string, enabled: boolean, win: BrowserWindow): void => {
+    const predictors = store.get('predictors');
     predictors[id] = enabled;
     store.set('predictors', predictors);
     win.webContents.send('predictorsChange')
@@ -29,7 +27,7 @@ const template: MenuItemConstructorOptions[] = [
                 label: '1 mile',
                 type: 'checkbox',
                 checked: !!predictors['1mi'],
-                click: (menuItem, browserWindow, event) => {
+                click: (menuItem: MenuItem, browserWindow: BrowserWindow): void => {
                     updatePredictor('1mi', menuItem.checked, browserWindow);
                 }
             },
@@ -37,7 +35,7 @@ const template: MenuItemConstructorOptions[] = [
                 label: '5 km',
                 type: 'checkbox',
                 checked: !!predictors['5k'],
-                click: (menuItem, browserWindow, event) => {
+                click: (menuItem: MenuItem, browserWindow: BrowserWindow): void => {
                     updatePredictor('5k', menuItem.checked, browserWindow);
                 }
             },
@@ -45,7 +43,7 @@ const template: MenuItemConstructorOptions[] = [
                 label: '10 km',
                 type: 'checkbox',
                 checked: !!predictors['10k'],
-                click: (menuItem, browserWindow, event) => {
+                click: (menuItem: MenuItem, browserWindow: BrowserWindow): void => {
                     updatePredictor('10k', menuItem.checked, browserWindow);
                 }
             },
@@ -53,7 +51,7 @@ const template: MenuItemConstructorOptions[] = [
                 label: 'Half Marathon',
                 type: 'checkbox',
                 checked: !!predictors['hm'],
-                click: (menuItem, browserWindow, event) => {
+                click: (menuItem: MenuItem, browserWindow: BrowserWindow): void => {
                     updatePredictor('hm', menuItem.checked, browserWindow);
                 }
             },
@@ -61,7 +59,7 @@ const template: MenuItemConstructorOptions[] = [
                 label: 'Marathon',
                 type: 'checkbox',
                 checked: !!predictors['fm'],
-                click: (menuItem, browserWindow, event) => {
+                click: (menuItem: MenuItem, browserWindow: BrowserWindow): void => {
                     updatePredictor('fm', menuItem.checked, browserWindow);
                 }
             },
@@ -74,7 +72,7 @@ const template: MenuItemConstructorOptions[] = [
     },
     {
         label: "Debug",
-        click: (menuItem, browserWindow, event) => {
+        click: (menuItem: MenuItem, browserWindow: BrowserWindow): void => {
             browserWindow.webContents.openDevTools();
         }
     }

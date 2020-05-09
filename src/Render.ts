@@ -6,9 +6,9 @@ require('./Menu/Renderer');
 
 const prediction: Prediction = new Prediction(5000, '5km');
 const splits: Splits = new Splits(400, '400m');
-let paceArr = [];
+const paceArr: number[] = [];
 // Create data monitor
-window.zwiftData.on('outgoingPlayerState', (playerState, serverWorldTime) => {
+window.zwiftData.on('outgoingPlayerState', (playerState) => {
     // Current Speed
     let speed = playerState.speed / 1e6;
     speed = Math.round( speed * 100 + Number.EPSILON ) / 100

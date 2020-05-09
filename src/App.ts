@@ -1,4 +1,4 @@
-import { app, BrowserWindow, IpcRenderer } from 'electron';
+import { app, BrowserWindow, IpcRenderer, ipcMain } from 'electron';
 import ZwiftPacketMonitor from './Zwift/ZwiftPacketMonitor';
 import Store = require('electron-store');
 import menu from './Menu/Definition';
@@ -32,7 +32,7 @@ function createWindow (): void {
     path.resolve('.', 'out', 'preload.js') :
     path.join(__dirname, 'preload.js');
 
-  let mainWindow: BrowserWindow = new BrowserWindow({
+  const mainWindow: BrowserWindow = new BrowserWindow({
     width: 800,
     height: 600,
     frame: false,
@@ -46,6 +46,14 @@ function createWindow (): void {
   mainWindow.loadFile('index.html');
 
   mainWindow.webContents.openDevTools();
+
+  ipcMain.on(`display-app-menu`, function(e, args) {
+    menu.popup({
+      window: mainWindow,
+      x: args.x,
+      y: args.y
+    });
+  });
 }
  
 app.whenReady().then(createWindow)

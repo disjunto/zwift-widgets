@@ -10,8 +10,10 @@ export default class Base {
         this.id = id;
 
         // Create and add to DOM
-        // @ts-ignore TS seems to be falling over here for an unknown reason
-        const widget = <HTMLElement>(document.querySelector('#template--' + template).content.cloneNode(true));
+        /* eslint-disable */
+        // @ts-ignore TS seems to be falling over here for an unknown reason // eslint-disable-line
+        /* eslint-enable */
+        const widget = (document.querySelector('#template--' + template).content.cloneNode(true)) as HTMLElement;
         widget.querySelector('.widget').id = 'widget-' + id;
 
         if (preactivate) {
@@ -31,17 +33,17 @@ export default class Base {
      * @return {string}
      */
     protected formatTime(time: number): string {
-        let minutes = Math.floor(time / 60);
-        let seconds = Math.floor(time - minutes * 60);
-        let secondsString = seconds.toString().padStart(2, "0");
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time - minutes * 60);
+        const secondsString = seconds.toString().padStart(2, "0");
     
         // Personal preference, 62:30 reads better than 1:02:30
         if (minutes < 65) {
             return minutes + ":" + secondsString;
         }
     
-        let hours = Math.floor(minutes / 60);
-        let minutesString = Math.floor(minutes - hours * 60).toString().padStart(2, '0');
+        const hours = Math.floor(minutes / 60);
+        const minutesString = Math.floor(minutes - hours * 60).toString().padStart(2, '0');
     
         return hours + ':' + minutesString + ':' + secondsString;
     }

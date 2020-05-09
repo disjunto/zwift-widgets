@@ -62,4 +62,4 @@ export default class Prediction extends Base {
 
         this.progressBar.style.strokeDashoffset = offset.toString();
     }
-};
+}

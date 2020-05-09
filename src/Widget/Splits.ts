@@ -19,7 +19,7 @@ export default class Splits extends Base {
      * @returns {void}
      */
     private initialise(label: string): void {
-        this.createFromTemplate('splits', (widget: HTMLElement, id: string) => {
+        this.createFromTemplate('splits', (widget: HTMLElement) => {
             widget.querySelector('.label').textContent = label;
         });
     }
@@ -34,6 +34,6 @@ export default class Splits extends Base {
      * @returns {void}
      */
     public update(currentDistance: number, pace: number, timeElapsed: number): void {
-
+        // TODO: Implement
     }
 }
