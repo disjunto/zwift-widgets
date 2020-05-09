@@ -1,9 +1,11 @@
 import Prediction from './Widget/Prediction';
 import './app.css';
+import Splits from './Widget/Splits';
 
 require('./Menu/Renderer');
 
 const prediction: Prediction = new Prediction(5000, '5km');
+const splits: Splits = new Splits(400, '400m');
 let paceArr = [];
 // Create data monitor
 window.zwiftData.on('outgoingPlayerState', (playerState, serverWorldTime) => {
@@ -24,5 +26,6 @@ window.zwiftData.on('outgoingPlayerState', (playerState, serverWorldTime) => {
 
     const distance = playerState.distance;
 
-    prediction.update(distance, avgPace, playerState.time)
+    prediction.update(distance, avgPace, playerState.time);
+    splits.update(distance, avgPace, playerState.time);
 });

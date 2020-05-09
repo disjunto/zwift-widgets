@@ -24,24 +24,25 @@
         </div>
 
         <div class="app" id="app-container">
-            <div class="widget widget--splits">
-                <h3><i class="fas fa-stopwatch"></i> 5KM Splits</h3>
-
-                <div class="body">
-                    <div class="split">
-                        <div class="split__counter">2</div>
-                        <div class="split__elapsed">4:35</div>
-                        <i class="fas fa-angle-double-right"></i>
-                        <div class="split__predicted">25:30</div>
-                    </div>
-
-                    <div class="split split--complete">
-                        <div class="split__counter">1</div>
-                        <div class="split__complete"><i class="fas fa-stopwatch"></i> 25:30</div>
+            <template id="template--splits">
+                <div class="widget widget--splits">
+                    <h3><i class="fas fa-stopwatch"></i> <span class="label">---</span></h3>
+    
+                    <div class="body">
+                        <div class="split">
+                            <div class="split__counter">2</div>
+                            <div class="split__elapsed">4:35</div>
+                            <i class="fas fa-angle-double-right"></i>
+                            <div class="split__predicted">25:30</div>
+                        </div>
+    
+                        <div class="split split--complete">
+                            <div class="split__counter">1</div>
+                            <div class="split__complete"><i class="fas fa-stopwatch"></i> 25:30</div>
+                        </div>
                     </div>
                 </div>
-            
-            </div>
+            </template>
 
             <template id="template--prediction">
                 <div class="widget widget--prediction" data-estimate="--:--">
