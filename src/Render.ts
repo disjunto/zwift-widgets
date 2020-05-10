@@ -1,15 +1,16 @@
-import Prediction from './Widget/Prediction';
 import './app.css';
-import Splits from './Widget/Splits';
+import { Prediction, Splits, Incline, Power } from './Widget';
+import { PlayerState } from './Zwift/proto';
 
 require('./Menu/Renderer');
 
 // TODO: Pull/build this from configuration
-const widgets = [new Prediction(10800, 'TFA Stage 2 (A)'), new Splits(2000, '2km'), new Splits(5000, '5km')];
-
+const widgets = [new Prediction(21097, 'Half Marathon'), new Splits(5000, '5km'), new Power(), new Incline()];
+(widgets[2] as Power).update(50);
+(widgets[3] as Incline).update(6);
 const paceArr: number[] = [];
 // Create data monitor
-window.zwiftData.on('outgoingPlayerState', (playerState) => {
+window.zwiftData.on('outgoingPlayerState', (playerState: PlayerState) => {
     // Current Speed
     let speed = playerState.speed / 1e6;
     speed = Math.round(speed * 100 + Number.EPSILON) / 100;
@@ -27,5 +28,16 @@ window.zwiftData.on('outgoingPlayerState', (playerState) => {
 
     const distance = playerState.distance;
 
-    widgets.forEach((widget) => widget.update(distance, avgPace, playerState.time));
+    widgets.forEach((widget) => {
+        // TODO: Make update params more flexible to allow easier extension
+        if (widget instanceof Incline) {
+            widget.update(playerState.climbing);
+            return;
+        }
+        if (widget instanceof Power) {
+            widget.update(playerState.power);
+            return;
+        }
+        widget.update(distance, avgPace, playerState.time);
+    });
 });

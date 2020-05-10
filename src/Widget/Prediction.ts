@@ -41,7 +41,7 @@ export default class Prediction extends Base {
         // Scale label text size to fit
         const labelEl = this.widget.querySelector<HTMLElement>('.label');
         labelEl.style.fontSize = window.getComputedStyle(labelEl).fontSize;
-        while (labelEl.offsetHeight > 64 || labelEl.offsetWidth > 180) {
+        while (labelEl.offsetHeight > 75 || labelEl.offsetWidth > 180) {
             labelEl.style.fontSize = parseInt(labelEl.style.fontSize) - 1 + 'px';
         }
     }
