@@ -28,6 +28,8 @@ declare global {
 function createWindow(): void {
     console.log(process.env.NODE_ENV);
     const isDev: boolean = process.env.NODE_ENV === 'development';
+
+    // TODO: Fix this mess to get builds working
     const preloadPath: string = isDev ? path.resolve('.', 'out', 'preload.js') : path.join(__dirname, 'preload.js');
 
     const mainWindow: BrowserWindow = new BrowserWindow({
@@ -41,6 +43,7 @@ function createWindow(): void {
         },
     });
 
+    // TODO: Update this to get builds working
     mainWindow.loadFile('index.html');
 
     mainWindow.webContents.openDevTools();
