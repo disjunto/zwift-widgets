@@ -2,6 +2,9 @@ import Base from './Base';
 import SplitRow from './SplitRow';
 import './splits.css';
 
+/**
+ * Widget providing custom splits lengths similar to the inbuilt 1km/1mi splits
+ */
 export default class Splits extends Base {
     private targetDistance: number;
     private lastSplitDistance: number;
