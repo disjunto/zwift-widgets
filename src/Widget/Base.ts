@@ -6,13 +6,13 @@ export default class Base {
 
     protected createFromTemplate(template: string, preactivate?: (widget: HTMLElement, id: string) => void): void {
         // Generate ID
-        const id = Math.random().toString(36);
+        const id = template + Math.random().toString(36);
         this.id = id;
 
         // Create and add to DOM
         /* eslint-disable */
         // @ts-ignore TS seems to be falling over here for an unknown reason // eslint-disable-line
-        const widget = (document.querySelector('#template--' + template).content.cloneNode(true)) as HTMLElement;
+        const widget = (document.querySelector('#template__' + template).content.cloneNode(true)) as HTMLElement;
         /* eslint-enable */
         widget.querySelector('.widget').id = 'widget-' + id;
 
@@ -30,7 +30,7 @@ export default class Base {
      *
      * @param {number} time Time/Duration in seconds
      *
-     * @return {string}
+     * @returns {string}
      */
     protected formatTime(time: number): string {
         const minutes = Math.floor(time / 60);

@@ -1,0 +1,54 @@
+/**
+ * Custom Splits
+ */
+ .widget--splits {
+    
+}
+
+.widget--splits h3 {
+    border-radius: 8px 8px 0 0;
+    background-color: rgb(47,47,47);
+    padding: 9px;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Dosis', sans-serif;
+    margin: 0;
+    margin-top: 30px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.widget--splits .body {
+    background-color: rgba(40, 40, 40, 0.35);
+    padding: 4px;
+}
+
+.split {
+    display: flex;
+    border-radius: 6px;
+    margin: 0 4px 4px;
+    padding: 8px 5px;   
+    justify-content: space-between;
+    color: white;
+    font-size: 1.6em;
+    font-family: 'Dosis', sans-serif;
+    align-items: center;
+    background: -webkit-linear-gradient(left, rgb(95,95,95) 16%, rgba(0,0,0,0.6) 16%);
+}
+
+.split__counter {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding-right: 12px;
+}
+
+.split__predicted {
+    color: rgb(194, 191, 188);
+}
+
+.split--complete {
+    padding: 4px 5px;
+    font-size: 1.2em;
+    justify-content: left;
+    background: rgb(95,95,95);
+}

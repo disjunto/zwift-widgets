@@ -5,14 +5,15 @@ import './prediction.css';
  * Widget providing a predicted finish time for any given distance
  */
 export default class Prediction extends Base {
-    /** @var {number} targetDistance Distance (in m) this widget will predict */
+    /** @member {number} targetDistance Distance (in m) this widget will predict */
     private targetDistance: number;
 
-    /** @var {HTMLElement} progressBar Reference to the progress bar DOM element */
+    /** @member {HTMLElement} progressBar Reference to the progress bar DOM element */
     private progressBar: HTMLElement;
 
     /**
      * Constructor.
+     *
      * @param {string} targetDistance Distance (in m) this widget will predict
      * @param {string} label Label to show on the widget
      */
@@ -53,6 +54,7 @@ export default class Prediction extends Base {
             return;
         }
 
+        // TODO: Break this functionality out to be used elsewhere
         const remainingTime = distToGo * pace;
         const estimate = remainingTime + timeElapsed;
         this.widget.dataset.estimate = this.formatTime(estimate);

@@ -1,8 +1,11 @@
 import Base from './Base';
+import SplitRow from './SplitRow';
+import './splits.css';
 
 export default class Splits extends Base {
     private splitDistance: number;
     private lastSplitDistance: number;
+    private splits: SplitRow[];
 
     constructor(splitDistance: number, label: string) {
         super();
@@ -24,6 +27,8 @@ export default class Splits extends Base {
         this.createFromTemplate('splits', (widget: HTMLElement) => {
             widget.querySelector('.label').textContent = label;
         });
+
+        this.splits = [new SplitRow(this.id, 1)];
     }
 
     /**
