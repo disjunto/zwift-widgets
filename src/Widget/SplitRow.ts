@@ -49,7 +49,7 @@ export default class SplitRow extends Base {
         document
             .getElementById('widget-' + parentId)
             .querySelector('.body')
-            .appendChild(widget);
+            .prepend(widget);
 
         this.widget = document.getElementById('split-' + id);
         this.elapsed = this.widget.querySelector('.split__elapsed');
@@ -90,6 +90,7 @@ export default class SplitRow extends Base {
         this.completed = true;
         this.predicted.remove();
 
+        this.widget.classList.add('split--complete');
         const icon = this.widget.querySelector('i');
         icon.remove();
 
