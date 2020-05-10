@@ -41,5 +41,20 @@ This work will be reviewed by the core team, with one of the following outcomes:
  - Your work will be modified by the core team, and the merge.
     - This may require declining your original pull request.
 
+## Features
+
+This application currently contains widgets for:
+ - Predicted finish times
+ - Custom split distances
+
+### Upcoming
+ - Widget configuration
+ - Distributable packages
+    - Currently contains misconfigured `electron-builder` implementation
+ - (Running) incline display
+ - (Running) power display
+ - Route detection & predictions
+ - (Cycling) power based predictions
+
 ## Licensing & Copyright
 Please see the `LICENSE` file contained without this source code.
