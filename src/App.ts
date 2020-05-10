@@ -1,4 +1,4 @@
-import { app, BrowserWindow, IpcRenderer, ipcMain } from 'electron';
+import { app, BrowserWindow, IpcRenderer, ipcMain, IpcMainEvent } from 'electron';
 import ZwiftPacketMonitor from './Zwift/ZwiftPacketMonitor';
 import Store = require('electron-store');
 import menu from './Menu/Definition';
@@ -45,7 +45,7 @@ function createWindow(): void {
 
     mainWindow.webContents.openDevTools();
 
-    ipcMain.on(`display-app-menu`, function (e, args) {
+    ipcMain.on(`display-app-menu`, function (e: IpcMainEvent, args: { x: number; y: number }) {
         menu.popup({
             window: mainWindow,
             x: args.x,

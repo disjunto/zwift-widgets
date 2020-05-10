@@ -20,11 +20,11 @@ export default class ZwiftPacketMonitor extends EventEmitter {
      *
      * @param {string} interfaceName Name of interface to attach to
      */
-    constructor(interfaceName) {
+    constructor(interfaceName: string) {
         super();
         this.cap = new Cap();
         this.linkType = null;
-        if (interfaceName.match(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/)) {
+        if (/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/.exec(interfaceName)) {
             this.interfaceName = Cap.findDevice(interfaceName);
         } else {
             this.interfaceName = interfaceName;

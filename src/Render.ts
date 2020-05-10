@@ -24,11 +24,11 @@ window.zwiftData.on('outgoingPlayerState', (playerState: PlayerState) => {
     if (paceArr.length > 10) {
         paceArr.shift();
     }
-    const avgPace = paceArr.reduce((a, b) => a + b, 0) / paceArr.length;
+    const avgPace = paceArr.reduce((carry: number, pace: number) => pace + carry, 0) / paceArr.length;
 
     const distance = playerState.distance;
 
-    widgets.forEach((widget) => {
+    widgets.forEach((widget: Incline | Power | Prediction | Splits) => {
         // TODO: Make update params more flexible to allow easier extension
         if (widget instanceof Incline) {
             widget.update(playerState.climbing);
