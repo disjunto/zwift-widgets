@@ -16,6 +16,7 @@ export default class Splits extends Base {
 
         this.targetDistance = targetDistance;
         this.lastSplitDistance = 0;
+        this.lastSplitTime = 0;
 
         this.initialise(label);
     }

@@ -6,6 +6,7 @@ require('./Menu/Renderer');
 
 const prediction: Prediction = new Prediction(5000, '5km');
 const splits: Splits = new Splits(400, '400m');
+splits.update(200, 200, 20);
 const paceArr: number[] = [];
 // Create data monitor
 window.zwiftData.on('outgoingPlayerState', (playerState) => {
