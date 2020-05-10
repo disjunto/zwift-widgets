@@ -54,7 +54,6 @@ export default class Prediction extends Base {
             return;
         }
 
-        // TODO: Break this functionality out to be used elsewhere
         const remainingTime = distToGo * pace;
         const estimate = remainingTime + timeElapsed;
         this.widget.dataset.estimate = this.formatTime(estimate);

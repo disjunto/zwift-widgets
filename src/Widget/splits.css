@@ -52,3 +52,22 @@
     justify-content: left;
     background: rgb(95,95,95);
 }
+
+.blink {
+    animation: blink 3s linear infinite;
+}
+
+@keyframes blink{
+    0% {
+        opacity: 0.6;
+        transform:scale(1)
+    }
+    50% {
+        opacity: 1;
+        transform:scale(1.1);
+    }
+    100% {
+        opacity: 0.6;
+        transform:scale(1);
+    }
+}

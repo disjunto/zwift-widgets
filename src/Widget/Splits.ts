@@ -3,14 +3,15 @@ import SplitRow from './SplitRow';
 import './splits.css';
 
 export default class Splits extends Base {
-    private splitDistance: number;
+    private targetDistance: number;
     private lastSplitDistance: number;
+    private lastSplitTime: number;
     private splits: SplitRow[];
 
-    constructor(splitDistance: number, label: string) {
+    constructor(targetDistance: number, label: string) {
         super();
 
-        this.splitDistance = splitDistance;
+        this.targetDistance = targetDistance;
         this.lastSplitDistance = 0;
 
         this.initialise(label);
@@ -28,7 +29,7 @@ export default class Splits extends Base {
             widget.querySelector('.label').textContent = label;
         });
 
-        this.splits = [new SplitRow(this.id, 1)];
+        this.splits = [new SplitRow(this.id, 1, this.targetDistance)];
     }
 
     /**
@@ -42,9 +43,19 @@ export default class Splits extends Base {
      */
     public update(currentDistance: number, pace: number, timeElapsed: number): void {
         // TODO: Implement
-        if (currentDistance - this.lastSplitDistance > this.splitDistance) {
+        if (currentDistance - this.lastSplitDistance > this.targetDistance) {
+            // Complete current split
+            this.splits[this.splits.length - 1].markComplete(timeElapsed - this.lastSplitTime);
+
             // Create a split
             this.lastSplitDistance = currentDistance;
+            this.lastSplitTime = timeElapsed;
+            this.splits.push(new SplitRow(this.id, this.splits.length, this.targetDistance));
         }
+
+        const currentSplit = this.splits[this.splits.length - 1];
+        const splitDistance = currentDistance - this.lastSplitDistance;
+        const splitTime = timeElapsed - this.lastSplitTime;
+        currentSplit.update(splitDistance, pace, splitTime);
     }
 }
