@@ -12,7 +12,7 @@ import {
     closeWindow,
 } from './Menu/Functions';
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
     window.getCurrentWindow = getCurrentWindow;
     window.openMenu = openMenu;
     window.minimizeWindow = minimizeWindow;
@@ -31,4 +31,4 @@ process.once('loaded', () => {
     window.ipcRenderer = ipcRenderer;
 });
 
-window.appConfig = new Store();    
+window.appConfig = new Store();

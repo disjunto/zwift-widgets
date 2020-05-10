@@ -25,9 +25,9 @@ export default class Prediction extends Base {
 
     /**
      * Initialise a new time prediction widget
-     * 
+     *
      * @param {string} label Label to display on the widget
-     * 
+     *
      * @returns {void}
      */
     private initialise(label: string): void {
@@ -40,11 +40,11 @@ export default class Prediction extends Base {
 
     /**
      * Update the widget with more recent data
-     * 
+     *
      * @param {number} currentDistance The distance so far (in m)
      * @param {number} pace The current pace (in seconds per km)
      * @param {number} timeElapsed The amount of time elapsed (in seconds)
-     * 
+     *
      * @returns {void}
      */
     public update(currentDistance: number, pace: number, timeElapsed: number): void {
@@ -57,7 +57,7 @@ export default class Prediction extends Base {
         const estimate = remainingTime + timeElapsed;
         this.widget.dataset.estimate = this.formatTime(estimate);
 
-        const percent = currentDistance / this.targetDistance * 100;
+        const percent = (currentDistance / this.targetDistance) * 100;
         const offset = ((100 - percent) / 100) * (Math.PI * 180);
 
         this.progressBar.style.strokeDashoffset = offset.toString();

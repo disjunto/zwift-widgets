@@ -25,35 +25,33 @@ declare global {
 /**
  * Create main application window
  */
-function createWindow (): void {
-  console.log(process.env.NODE_ENV);
-  const isDev: boolean = process.env.NODE_ENV === "development";
-  const preloadPath: string = isDev ?
-    path.resolve('.', 'out', 'preload.js') :
-    path.join(__dirname, 'preload.js');
+function createWindow(): void {
+    console.log(process.env.NODE_ENV);
+    const isDev: boolean = process.env.NODE_ENV === 'development';
+    const preloadPath: string = isDev ? path.resolve('.', 'out', 'preload.js') : path.join(__dirname, 'preload.js');
 
-  const mainWindow: BrowserWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    frame: false,
-    transparent: true,
-    alwaysOnTop: true,
-    webPreferences: {
-      preload: preloadPath
-    }
-  });
-
-  mainWindow.loadFile('index.html');
-
-  mainWindow.webContents.openDevTools();
-
-  ipcMain.on(`display-app-menu`, function(e, args) {
-    menu.popup({
-      window: mainWindow,
-      x: args.x,
-      y: args.y
+    const mainWindow: BrowserWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        frame: false,
+        transparent: true,
+        alwaysOnTop: true,
+        webPreferences: {
+            preload: preloadPath,
+        },
     });
-  });
+
+    mainWindow.loadFile('index.html');
+
+    mainWindow.webContents.openDevTools();
+
+    ipcMain.on(`display-app-menu`, function (e, args) {
+        menu.popup({
+            window: mainWindow,
+            x: args.x,
+            y: args.y,
+        });
+    });
 }
- 
-app.whenReady().then(createWindow)
+
+app.whenReady().then(createWindow);

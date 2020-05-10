@@ -27,24 +27,26 @@ export default class Base {
 
     /**
      * Reformat a time given in seconds to [h]:mm:ss
-     * 
+     *
      * @param {number} time Time/Duration in seconds
-     * 
+     *
      * @return {string}
      */
     protected formatTime(time: number): string {
         const minutes = Math.floor(time / 60);
         const seconds = Math.floor(time - minutes * 60);
-        const secondsString = seconds.toString().padStart(2, "0");
-    
+        const secondsString = seconds.toString().padStart(2, '0');
+
         // Personal preference, 62:30 reads better than 1:02:30
         if (minutes < 65) {
-            return minutes + ":" + secondsString;
+            return minutes + ':' + secondsString;
         }
-    
+
         const hours = Math.floor(minutes / 60);
-        const minutesString = Math.floor(minutes - hours * 60).toString().padStart(2, '0');
-    
+        const minutesString = Math.floor(minutes - hours * 60)
+            .toString()
+            .padStart(2, '0');
+
         return hours + ':' + minutesString + ':' + secondsString;
     }
 }

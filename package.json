@@ -7,7 +7,7 @@
   },
   "main": "src/App.ts",
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint src --fix",
     "build": "webpack",
     "start": "yarn build --mode=development && electron ./out/app.js",
     "restart": "electron ./out/app.js",

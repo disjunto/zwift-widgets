@@ -11,7 +11,7 @@ const paceArr: number[] = [];
 window.zwiftData.on('outgoingPlayerState', (playerState) => {
     // Current Speed
     let speed = playerState.speed / 1e6;
-    speed = Math.round( speed * 100 + Number.EPSILON ) / 100
+    speed = Math.round(speed * 100 + Number.EPSILON) / 100;
     if (speed < Number.EPSILON) {
         return;
     }
@@ -22,7 +22,7 @@ window.zwiftData.on('outgoingPlayerState', (playerState) => {
     if (paceArr.length > 10) {
         paceArr.shift();
     }
-    const avgPace = paceArr.reduce((a,b) => a + b, 0) / paceArr.length;
+    const avgPace = paceArr.reduce((a, b) => a + b, 0) / paceArr.length;
 
     const distance = playerState.distance;
 
