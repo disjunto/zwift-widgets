@@ -30,7 +30,7 @@ export default class Splits extends Base {
      */
     private initialise(label: string): void {
         this.createFromTemplate('splits', (widget: HTMLElement) => {
-            widget.querySelector('.label').textContent = label;
+            widget.querySelector('.label').textContent = label + ' Splits';
         });
 
         this.splits = [new SplitRow(this.id, 1, this.targetDistance)];

@@ -1,13 +1,10 @@
 /**
  * Custom Splits
  */
- .widget--splits {
-    
-}
 
 .widget--splits h3 {
     border-radius: 8px 8px 0 0;
-    background-color: rgb(47,47,47);
+    background-color: rgb(47, 47, 47);
     padding: 9px;
     color: white;
     text-transform: uppercase;
@@ -27,13 +24,13 @@
     display: flex;
     border-radius: 6px;
     margin: 0 4px 4px;
-    padding: 8px 5px;   
+    padding: 8px 5px;
     justify-content: space-between;
     color: white;
     font-size: 1.6em;
     font-family: 'Dosis', sans-serif;
     align-items: center;
-    background: -webkit-linear-gradient(left, rgb(95,95,95) 16%, rgba(0,0,0,0.6) 16%);
+    background: -webkit-linear-gradient(left, rgb(95, 95, 95) 16%, rgba(0, 0, 0, 0.6) 16%);
 }
 
 .split__counter {
@@ -50,24 +47,24 @@
     padding: 4px 5px;
     font-size: 1.2em;
     justify-content: left;
-    background: rgb(95,95,95);
+    background: rgb(95, 95, 95);
 }
 
 .blink {
     animation: blink 3s linear infinite;
 }
 
-@keyframes blink{
+@keyframes blink {
     0% {
         opacity: 0.6;
-        transform:scale(1)
+        transform: scale(1)
     }
     50% {
         opacity: 1;
-        transform:scale(1.1);
+        transform: scale(1.1);
     }
     100% {
         opacity: 0.6;
-        transform:scale(1);
+        transform: scale(1);
     }
 }

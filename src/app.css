@@ -4,9 +4,7 @@ body {
     line-height: 1;
     margin: 0;
     padding: 0;
-
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-
     -webkit-app-region: drag;
 }
 
@@ -17,7 +15,8 @@ body {
     overflow: hidden;
 }
 
-body:hover .titleBar, .titleBar:hover {
+body:hover .titleBar,
+.titleBar:hover {
     visibility: visible;
 }
 
@@ -29,15 +28,14 @@ body:hover .titleBar, .titleBar:hover {
     height: 22px;
     pointer-events: auto;
     -webkit-app-region: no-drag;
-
     color: #b9bbbe;
-
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
     display: flex
 }
+
 #btn-close:hover {
     color: #fff;
     background-color: #f04747;
@@ -45,16 +43,17 @@ body:hover .titleBar, .titleBar:hover {
 
 .app {
     padding: 0 20px;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
+
 /**
  * Menu Bar
  */
- #menu-bar {
+
+#menu-bar {
     visibility: visible;
     display: flex;
     justify-content: space-between;
@@ -63,20 +62,20 @@ body:hover .titleBar, .titleBar:hover {
     background: #202225;
     -webkit-app-region: drag;
     color: #fff;
-  }
-  
-  #menu-bar > div {
+}
+
+#menu-bar>div {
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .menubar-btn {
+}
+
+.menubar-btn {
     -webkit-app-region: no-drag;
-  }
-  
-  .container {
+}
+
+.container {
     height: calc(100vh - 30px);
     background: #34475ab0;
     color: white;
@@ -84,24 +83,24 @@ body:hover .titleBar, .titleBar:hover {
     justify-content: center;
     align-items: center;
     font-size: 2em;
-  }
-  
-  button {
+}
+
+button {
     height: 100%;
     padding: 0 15px;
     border: none;
     background: transparent;
     outline: none;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background: rgba(221, 221, 221, 0.2);
-  }
-  
-  #close-btn:hover {
+}
+
+#close-btn:hover {
     background: #f04747;
-  }
-  
-  button i {
+}
+
+button i {
     color: white;
-  }
+}

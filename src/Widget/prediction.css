@@ -1,28 +1,32 @@
 /**
  * Progress indicator
  */
+
 .progress circle {
     stroke-dashoffset: 565.4866776461628;
     transition: stroke-dashoffset 1s linear;
     stroke: #666;
     stroke-width: 1em;
 }
+
 .progress .bar {
     stroke: #ff7638;
 }
+
 .progress .path {
-    stroke: rgb(200,200,200);
+    stroke: rgb(200, 200, 200);
     stroke-opacity: 50%;
     stroke-dashoffset: 0;
 }
+
 .widget--prediction {
     margin: 2em 0;
     /* box-shadow: inset 0 0 1em black; */
     border-radius: 100%;
     position: relative;
-
     text-align: center;
 }
+
 .widget--prediction:after {
     position: absolute;
     display: block;
@@ -30,7 +34,6 @@
     width: 160px;
     left: 50%;
     top: 50%;
-
     content: attr(data-estimate);
     background-color: transparent;
     margin-top: -115px;
@@ -41,14 +44,21 @@
     text-shadow: 0 0 0.5em black;
     color: #fff;
 }
+
 .widget--prediction .distance {
     position: absolute;
     top: 60px;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 180px;
+    height: 64px;
+}
+
+.widget--prediction .label {
     font-size: 4em;
-    font-weight: bold;
     color: #ff7638;
+    font-weight: bold;
     text-shadow: 0 0 0.5em black;
     font-family: 'Dosis', sans-serif;
 }

@@ -34,9 +34,16 @@ export default class Prediction extends Base {
     private initialise(label: string): void {
         this.createFromTemplate('prediction', (widget: HTMLElement, id: string) => {
             widget.querySelector('.bar').id = 'progress-' + id;
-            widget.querySelector('.distance').textContent = label;
+            widget.querySelector<HTMLElement>('.label').textContent = label;
         });
         this.progressBar = document.getElementById('progress-' + this.id);
+
+        // Scale label text size to fit
+        const labelEl = this.widget.querySelector<HTMLElement>('.label');
+        labelEl.style.fontSize = window.getComputedStyle(labelEl).fontSize;
+        while (labelEl.offsetHeight > 64 || labelEl.offsetWidth > 180) {
+            labelEl.style.fontSize = parseInt(labelEl.style.fontSize) - 1 + 'px';
+        }
     }
 
     /**
