@@ -1,6 +1,6 @@
 {
   "name": "zwift-widgets",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Overlay utility for adding extra information to the Zwift UI",
   "build": {
     "appId": "amd.zwift_widgets"
