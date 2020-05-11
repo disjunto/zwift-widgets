@@ -1,17 +1,17 @@
-import Base from './Base';
+import Base from '../Base';
 import SplitRow from './SplitRow';
 import './splits.css';
 
 /**
  * Widget providing custom splits lengths similar to the inbuilt 1km/1mi splits
  */
-export default class Splits extends Base {
+export default class Widget extends Base {
     private targetDistance: number;
     private lastSplitDistance: number;
     private lastSplitTime: number;
     private splits: SplitRow[];
 
-    constructor(targetDistance: number, label: string) {
+    constructor(label: string, targetDistance: number) {
         super();
 
         this.targetDistance = targetDistance;
@@ -46,7 +46,6 @@ export default class Splits extends Base {
      * @returns {void}
      */
     public update(currentDistance: number, pace: number, timeElapsed: number): void {
-        // TODO: Implement
         if (currentDistance - this.lastSplitDistance > this.targetDistance) {
             // Complete current split
             this.splits[this.splits.length - 1].markComplete(timeElapsed - this.lastSplitTime);

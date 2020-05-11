@@ -1,4 +1,4 @@
-import Base from './Base';
+import Base from '../Base';
 
 /**
  * Widget class representing a row containing split information

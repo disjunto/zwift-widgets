@@ -10,6 +10,20 @@ if (startEl) {
                     target: 5000,
                 }),
             },
+            {
+                name: 'prediction',
+                config: JSON.stringify({
+                    label: '10km',
+                    target: 10000,
+                }),
+            },
+            {
+                name: 'customsplit',
+                config: JSON.stringify({
+                    label: '400m',
+                    target: 400,
+                }),
+            },
         ]);
     });
 }

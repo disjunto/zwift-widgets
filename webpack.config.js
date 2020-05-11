@@ -146,4 +146,44 @@ module.exports = [
             new MiniCssExtractPlugin(),
         ],
     },
+
+    // Custom Splits
+    {
+        entry: './src/Widget/CustomSplit/Render.ts',
+        target: 'electron-renderer',
+        devtool: 'source-map',
+        resolve: {
+            extensions: ['.ts', '.js', '.json'],
+        },
+        module: {
+            rules: [{
+                    test: /\.ts(x?)$/,
+                    include: /src/,
+                    use: [{ loader: 'ts-loader' }],
+                },
+                {
+                    test: /\.css$/i,
+                    include: /src/,
+                    use: [{
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                publicPath: __dirname + '/out/widgets/customsplit',
+                            },
+                        },
+                        'css-loader',
+                    ],
+                },
+            ],
+        },
+        output: {
+            path: __dirname + '/out/widgets/customsplit',
+            filename: 'render.js',
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: './src/Widget/CustomSplit/index.html',
+            }),
+            new MiniCssExtractPlugin(),
+        ],
+    },
 ];
