@@ -49,6 +49,7 @@ function createSettingsWindow(): BrowserWindow {
 }
 
 let windows: BrowserWindow[] = [];
+const paceArr: number[] = [];
 app.whenReady()
     .then(createSettingsWindow)
     .then((browser: BrowserWindow) => {
@@ -87,7 +88,33 @@ app.whenReady()
             // Redirect to each active widget window
             monitor.on('outgoingPlayerState', (playerState: PlayerState) => {
                 windows.forEach((browserWindow: BrowserWindow) => {
-                    browserWindow.webContents.send('dataUpdated', playerState);
+                    const speed = playerState.speed / 1e6;
+
+                    if (speed > 0) {
+                        paceArr.push(3600 / speed);
+                        if (paceArr.length > 10) {
+                            paceArr.shift();
+                        }
+                    }
+                    const averagedPace =
+                        paceArr.reduce((carry: number, pace: number) => pace + carry, 0) / paceArr.length;
+
+                    const data = {
+                        time: playerState.time,
+                        distance: playerState.distance,
+                        speed: speed,
+                        pace: speed > 0 ? 3600 / speed : 60000,
+                        averagedPace,
+                        power: playerState.power,
+                        incline: playerState.climbing,
+                        heartrate: playerState.heartrate,
+                        xPos: playerState.x,
+                        yPos: playerState.y,
+                        zPos: playerState.altitude,
+                        sport: playerState.sport,
+                    };
+
+                    browserWindow.webContents.send('dataUpdated', data);
                 });
             });
         });
