@@ -1,9 +1,39 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = [{
+module.exports = [
+    // Main application
+    {
         entry: './src/App.ts',
         target: 'electron-main',
+        node: {
+            __dirname: false,
+        },
+        resolve: {
+            extensions: ['.ts', '.js', '.json'],
+        },
+        module: {
+            rules: [{
+                    test: /\.ts$/,
+                    include: /src/,
+                    use: [{ loader: 'ts-loader' }],
+                },
+                {
+                    test: /\.node$/,
+                    use: 'node-loader',
+                },
+            ],
+        },
+        output: {
+            path: __dirname + '/out',
+            filename: 'app.js',
+        },
+    },
+    // Settings preload
+    {
+        entry: './src/Settings/Preload.ts',
+        target: 'electron-preload',
+        devtool: 'source-map',
         resolve: {
             extensions: ['.ts', '.js', '.json'],
         },
@@ -15,12 +45,13 @@ module.exports = [{
             }, ],
         },
         output: {
-            path: __dirname + '/out',
-            filename: 'app.js',
+            path: __dirname + '/out/settings',
+            filename: 'preload.js',
         },
     },
+    // Module preload
     {
-        entry: './src/Preload.ts',
+        entry: './src/Widget/Preload.ts',
         target: 'electron-preload',
         devtool: 'source-map',
         resolve: {
@@ -39,7 +70,7 @@ module.exports = [{
             ],
         },
         output: {
-            path: __dirname + '/out',
+            path: __dirname + '/out/widgets',
             filename: 'preload.js',
         },
     },
@@ -100,7 +131,7 @@ module.exports = [{
             ],
         },
         output: {
-            path: __dirname + '/out',
+            path: __dirname + '/out/settings',
             filename: 'settings.js',
         },
         plugins: [
@@ -113,7 +144,7 @@ module.exports = [{
 
     // Prediction Widget
     {
-        entry: './src/Widget/Predictions/Render.ts',
+        entry: './src/Widget/Prediction/Render.ts',
         target: 'electron-renderer',
         devtool: 'source-map',
         resolve: {
@@ -128,18 +159,24 @@ module.exports = [{
                 {
                     test: /\.css$/i,
                     include: /src/,
-                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                    use: [{
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                publicPath: __dirname + '/out/widgets/prediction',
+                            },
+                        },
+                        'css-loader',
+                    ],
                 },
             ],
         },
         output: {
-            path: __dirname + '/out',
-            filename: 'widgets/predictions/render.js',
+            path: __dirname + '/out/widgets/prediction',
+            filename: 'render.js',
         },
         plugins: [
             new HtmlWebpackPlugin({
-                template: './src/Widget/Predictions/index.html',
-                filename: 'widgets/predictions/index.html',
+                template: './src/Widget/Prediction/index.html',
             }),
             new MiniCssExtractPlugin(),
         ],

@@ -1,8 +1,9 @@
 import { app, BrowserWindow, IpcRenderer, ipcMain, IpcMainEvent } from 'electron';
 import ZwiftPacketMonitor from './Zwift/ZwiftPacketMonitor';
 import Store = require('electron-store');
-import menu from './Menu/Definition';
 import * as path from 'path';
+import { address } from 'ip';
+import { PlayerState } from './Zwift/proto';
 
 /**
  * Declare globals on window object
@@ -10,10 +11,8 @@ import * as path from 'path';
 declare global {
     interface Window {
         appConfig: Store;
-        zwiftData: ZwiftPacketMonitor;
-        ipcRenderer: IpcRenderer;
+        events: IpcRenderer;
         getCurrentWindow: () => BrowserWindow;
-        openMenu: (x: number, y: number) => void;
         minimizeWindow: () => void;
         unmaximizeWindow: () => void;
         maxUnmaxWindow: () => void;
@@ -22,39 +21,66 @@ declare global {
     }
 }
 
+const isDev: boolean = process.env.NODE_ENV === 'development';
+
 /**
  * Create main application window
+ *
+ * @returns Promise<BrowserWindow>
  */
-function createWindow(): void {
-    console.log(process.env.NODE_ENV);
-    const isDev: boolean = process.env.NODE_ENV === 'development';
-
+function createSettingsWindow(): BrowserWindow {
     // TODO: Fix this mess to get builds working
     const preloadPath: string = isDev ? path.resolve('.', 'out', 'preload.js') : path.join(__dirname, 'preload.js');
 
     const mainWindow: BrowserWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        frame: false,
-        transparent: true,
-        alwaysOnTop: true,
         webPreferences: {
-            preload: preloadPath,
+            preload: path.join(__dirname, 'settings', 'preload.js'),
         },
     });
 
     // TODO: Update this to get builds working
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile(path.join(__dirname, 'settings', 'index.html'));
 
-    mainWindow.webContents.openDevTools();
+    if (isDev) mainWindow.webContents.openDevTools();
 
-    ipcMain.on(`display-app-menu`, function (e: IpcMainEvent, args: { x: number; y: number }) {
-        menu.popup({
-            window: mainWindow,
-            x: args.x,
-            y: args.y,
-        });
-    });
+    return mainWindow;
 }
 
-app.whenReady().then(createWindow);
+app.whenReady()
+    .then(createSettingsWindow)
+    .then((browser: BrowserWindow) => {
+        ipcMain.on('startWidgets', (event: IpcMainEvent, widgets: { name: string; config: object }[]) => {
+            // Create data monitor
+            const monitor = new ZwiftPacketMonitor(address());
+            monitor.start();
+
+            const widgetPreload = path.join(__dirname, 'widgets', 'preload.js');
+
+            const windows: BrowserWindow[] = [];
+            widgets.forEach((widget) => {
+                const widgetWindow = new BrowserWindow({
+                    width: 260,
+                    height: 260,
+                    frame: false,
+                    transparent: true,
+                    alwaysOnTop: true,
+                    webPreferences: {
+                        preload: widgetPreload,
+                    },
+                });
+                widgetWindow.loadURL(path.join(__dirname, 'widgets', widget.name, 'index.html'));
+
+                if (isDev) widgetWindow.webContents.openDevTools();
+                widgetWindow.webContents.executeJavaScript('configureWidget(' + widget.config + ');');
+            });
+
+            // Redirect to each active widget window
+            monitor.on('outgoingPlayerState', (playerState: PlayerState) => {
+                windows.forEach((browserWindow: BrowserWindow) => {
+                    browserWindow.webContents.send('dataUpdated', playerState);
+                });
+            });
+        });
+    });

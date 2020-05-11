@@ -1,9 +1,20 @@
 /**
  * Base Widget
  */
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.app {
+    height: 100vh;
+    width: 100vw;
+}
+
 .widget {
     -webkit-app-region: drag;
-
-    height: 250px;
-    width: 250px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }

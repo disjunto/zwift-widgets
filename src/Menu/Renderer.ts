@@ -1,13 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
-    const menuButton = document.getElementById('menu-btn');
     const minimizeButton = document.getElementById('minimize-btn');
     const maxUnmaxButton = document.getElementById('max-unmax-btn');
     const closeButton = document.getElementById('close-btn');
-
-    menuButton.addEventListener('click', (e: MouseEvent) => {
-        // Opens menu at (x,y) coordinates of mouse click on the hamburger icon.
-        window.openMenu(e.x, e.y);
-    });
 
     minimizeButton.addEventListener('click', () => {
         window.minimizeWindow();

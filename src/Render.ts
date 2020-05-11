@@ -1,14 +1,15 @@
 import './app.css';
 import { Prediction, Splits, Incline, Power } from './Widget';
 import { PlayerState } from './Zwift/proto';
+import { IpcRendererEvent } from 'electron';
 
 require('./Menu/Renderer');
 
 // TODO: Pull/build this from configuration
-const widgets = [new Prediction(10800, 'TFA Stage 2'), new Splits(2000, '2km')];
+const widgets = [new Prediction('TFA Stage 2', 10800), new Splits(2000, '2km')];
 const paceArr: number[] = [];
 // Create data monitor
-window.zwiftData.on('outgoingPlayerState', (playerState: PlayerState) => {
+const updateWidgets = (playerState: PlayerState): void => {
     // Current Speed
     let speed = playerState.speed / 1e6;
     speed = Math.round(speed * 100 + Number.EPSILON) / 100;
@@ -38,4 +39,7 @@ window.zwiftData.on('outgoingPlayerState', (playerState: PlayerState) => {
         }
         widget.update(distance, avgPace, playerState.time);
     });
+};
+window.events.on('dataUpdated', (event: IpcRendererEvent, playerState: PlayerState) => {
+    updateWidgets(playerState);
 });

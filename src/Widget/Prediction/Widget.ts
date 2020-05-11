@@ -1,4 +1,4 @@
-import Base from './Base';
+import Base from '../Base';
 import './prediction.css';
 
 /**
@@ -17,7 +17,7 @@ export default class Prediction extends Base {
      * @param {string} targetDistance Distance (in m) this widget will predict
      * @param {string} label Label to show on the widget
      */
-    constructor(targetDistance: number, label: string) {
+    constructor(label: string, targetDistance: number) {
         super();
         this.targetDistance = targetDistance;
 
