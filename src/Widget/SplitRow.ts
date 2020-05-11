@@ -93,6 +93,8 @@ export default class SplitRow extends Base {
         this.widget.classList.add('split--complete');
         const icon = this.widget.querySelector('i');
         icon.remove();
+        icon.classList.add('fa-stopwatch');
+        icon.classList.remove('fa-angle-double-right', 'blink');
 
         this.elapsed.classList.remove('split__elapsed');
         this.elapsed.classList.add('split__complete');

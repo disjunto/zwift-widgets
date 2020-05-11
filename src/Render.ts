@@ -5,9 +5,7 @@ import { PlayerState } from './Zwift/proto';
 require('./Menu/Renderer');
 
 // TODO: Pull/build this from configuration
-const widgets = [new Prediction(21097, 'Half Marathon'), new Splits(5000, '5km'), new Power(), new Incline()];
-(widgets[2] as Power).update(50);
-(widgets[3] as Incline).update(6);
+const widgets = [new Prediction(10800, 'TFA Stage 2'), new Splits(2000, '2km')];
 const paceArr: number[] = [];
 // Create data monitor
 window.zwiftData.on('outgoingPlayerState', (playerState: PlayerState) => {

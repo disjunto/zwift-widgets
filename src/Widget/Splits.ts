@@ -54,7 +54,7 @@ export default class Splits extends Base {
             // Create a split
             this.lastSplitDistance = currentDistance;
             this.lastSplitTime = timeElapsed;
-            this.splits.push(new SplitRow(this.id, this.splits.length, this.targetDistance));
+            this.splits.push(new SplitRow(this.id, this.splits.length + 1, this.targetDistance));
         }
 
         const currentSplit = this.splits[this.splits.length - 1];
