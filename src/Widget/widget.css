@@ -10,11 +10,16 @@ body {
 .app {
     height: 100vh;
     width: 100vw;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.app:hover {
+    background: red;
+    border: 1px solid black;
 }
 
 .widget {
     -webkit-app-region: drag;
-    margin: 0;
-    height: 100%;
-    width: 100%;
+    box-sizing: border-box;
 }

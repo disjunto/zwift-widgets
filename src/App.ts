@@ -48,17 +48,23 @@ function createSettingsWindow(): BrowserWindow {
     return mainWindow;
 }
 
+let windows: BrowserWindow[] = [];
 app.whenReady()
     .then(createSettingsWindow)
     .then((browser: BrowserWindow) => {
         ipcMain.on('startWidgets', (event: IpcMainEvent, widgets: { name: string; config: object }[]) => {
+            // Close existing widgets
+            windows.forEach((browserWindow: BrowserWindow) => {
+                browserWindow.close();
+            });
+            windows = [];
+
             // Create data monitor
             const monitor = new ZwiftPacketMonitor(address());
             monitor.start();
 
             const widgetPreload = path.join(__dirname, 'widgets', 'preload.js');
 
-            const windows: BrowserWindow[] = [];
             widgets.forEach((widget) => {
                 const widgetWindow = new BrowserWindow({
                     width: 260,
@@ -74,6 +80,8 @@ app.whenReady()
 
                 if (isDev) widgetWindow.webContents.openDevTools();
                 widgetWindow.webContents.executeJavaScript('configureWidget(' + widget.config + ');');
+
+                windows.push(widgetWindow);
             });
 
             // Redirect to each active widget window
@@ -81,6 +89,13 @@ app.whenReady()
                 windows.forEach((browserWindow: BrowserWindow) => {
                     browserWindow.webContents.send('dataUpdated', playerState);
                 });
+            });
+        });
+
+        ipcMain.on('closeApplication', () => {
+            // Close all widgets
+            windows.forEach((browserWindow: BrowserWindow) => {
+                browserWindow.close();
             });
         });
     });

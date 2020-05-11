@@ -74,41 +74,6 @@ module.exports = [
             filename: 'preload.js',
         },
     },
-    {
-        entry: './src/Render.ts',
-        target: 'electron-renderer',
-        devtool: 'source-map',
-        resolve: {
-            extensions: ['.ts', '.js', '.json'],
-        },
-        module: {
-            rules: [{
-                    test: /\.ts(x?)$/,
-                    include: /src/,
-                    use: [{ loader: 'ts-loader' }],
-                },
-                {
-                    test: /\.css$/i,
-                    include: /src/,
-                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
-                },
-                {
-                    test: /\.node$/,
-                    use: 'node-loader',
-                },
-            ],
-        },
-        output: {
-            path: __dirname + '/out',
-            filename: 'renderer.js',
-        },
-        plugins: [
-            new HtmlWebpackPlugin({
-                template: './src/index.html',
-            }),
-            new MiniCssExtractPlugin(),
-        ],
-    },
     // Settings page
     {
         entry: './src/Settings/Render.ts',
